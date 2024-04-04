@@ -10,13 +10,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val countdownValue = findViewById<EditText>(R.id.countdownEditText)
+
         val intent = Intent(this, CountdownService::class.java)
             .putExtra(COUNTDOWN_START_VALUE,countdownValue.text.toString())
 
         val countdownStartButton = findViewById<Button>(R.id.countdownButton)
         countdownStartButton.setOnClickListener {
-            startService(intent)
+                startService(Intent(this,CountdownService::class.java)
+                    .putExtra(COUNTDOWN_START_VALUE,countdownValue.text.toString().toInt()))
         }
     }
 }
